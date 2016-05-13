@@ -19,11 +19,12 @@
     "chalk": "^1.1.1",
     "esprima": "^2.5.0",
     "estraverse": "^4.1.0",
+    "express": "^4.13.4",
     "fs-extra": "^0.26.2",
     "glob": "^5.0.14",
     "jszip": "^2.5.0",
-    "minimist": "^1.2.0",
     "minimatch": "2 || 3",
+    "minimist": "^1.2.0",
     "request": "^2.67.0",
     "tmp": "0.0.28"
   },
@@ -40,6 +41,9 @@
   "author": {
     "name": "Alexandre Barreira",
     "email": "abarreir@gmail.com"
+  },
+  "scripts": {
+      "start": "node serv.js"
   },
   "license": "MIT",
   "devDependencies": {

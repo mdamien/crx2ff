@@ -62,8 +62,7 @@ function load (idOrPath, readOnly, excludes, cb) {
             return loadFromPath(crxPath, true, excludes, cb);
         });
     }
-
-    return loadFromPath(idOrPath, readOnly, excludes, cb);
+    throw "Invalid EXT_ID";
 }
 
 module.exports = load;

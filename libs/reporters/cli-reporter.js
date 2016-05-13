@@ -1,4 +1,5 @@
 var chalk = require('chalk');
+chalk.enabled = false;
 
 function prettifyStatus (status) {
     var symbols = {
@@ -35,50 +36,65 @@ function prettifyStatus (status) {
 }
 
 function printScriptsReport (report) {
+    var out = '';
+    var log = function() {
+        out += Array.from(arguments).join(' ') + '\n';
+    }
     Object.keys(report.used).sort().forEach(function (api) {
-        console.log(chalk.white.bold.bgMagenta("chrome." + api));
+        log(chalk.white.bold.bgMagenta("chrome." + api));
 
         var apiExprs = report.used[api];
 
         Object.keys(apiExprs).sort().forEach(function (expr) {
-            console.log("  ." + expr + " " + prettifyStatus(apiExprs[expr].status));
+            log("  ." + expr + " " + prettifyStatus(apiExprs[expr].status));
 
             apiExprs[expr].filesLocations.forEach(function (file) {
-                console.log("     " + file.file);
+                log("     " + file.file);
 
                 file.locations.forEach(function (loc) {
-                    console.log("       - line: " + loc.line + ", col: " + loc.column);
+                    log("       - line: " + loc.line + ", col: " + loc.column);
                 });
             });
 
-            console.log("");
+            log("");
         });
     });
+    return out;
 }
 
 function printManifestReport (report) {
+    var out = '';
+    var log = function() {
+        out += Array.from(arguments).join(' ') + '\n';
+    }
     report.forEach(function (manifestKey) {
         if (!(manifestKey.support instanceof Array)) {
-            return console.log("  - " + manifestKey.key + " " + prettifyStatus(manifestKey.support));
+            return log("  - " + manifestKey.key + " " + prettifyStatus(manifestKey.support));
         }
 
-        console.log("  - " + manifestKey.key);
+        log("  - " + manifestKey.key);
 
         manifestKey.support.forEach(function (support) {
-            console.log("   " + prettifyStatus(support));
+            log("   " + prettifyStatus(support));
         });
     });
+    return out;
 }
 
 function printReport (report) {
-    console.log(chalk.black.bold.bgYellow("manifest.json support"));
-    console.log("");
-    printManifestReport(report.manifestReport);
+    var out = '';
+    var log = function() {
+        out += Array.from(arguments).join(' ') + '\n';
+    }
+    log(chalk.black.bold.bgYellow("manifest.json support"));
+    log("");
+    log(printManifestReport(report.manifestReport));
 
-    console.log("");
-    console.log(chalk.black.bold.bgYellow("API usage support"));
-    console.log("");
-    printScriptsReport(report.scriptsReport);
+    log("");
+    log(chalk.black.bold.bgYellow("API usage support"));
+    log("");
+    log(printScriptsReport(report.scriptsReport));
+    return out;
 }
 
 module.exports = printReport;

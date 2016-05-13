@@ -96,7 +96,9 @@ function convertExtension (extensionPath, opts, cb) {
 
             var z = zip.generate({type: 'nodebuffer'});
 
-            fs.writeFile(opts.outputPath || 'crx2ff.xpi', z, cb);
+            // fs.writeFile(opts.outputPath || 'crx2ff.xpi', z, cb);
+
+            return cb(undefined, z);
         });
     });
 }

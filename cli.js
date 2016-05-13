@@ -39,7 +39,7 @@ if (command === 'analyse') {
             return jsonReporter(report, jsonPath)
         }
 
-        return cliReporter(report);
+        return console.log(cliReporter(report));
     });
 } else {
     var opts = {
