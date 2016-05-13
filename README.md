@@ -1,5 +1,8 @@
 # crx2ff
 
+
+# This is an experimental fork to add an API endpoint
+
 [![NPM Version](https://img.shields.io/npm/v/crx2ff.svg)](https://www.npmjs.com/package/crx2ff)
 [![NPM Downloads](https://img.shields.io/npm/dm/crx2ff.svg)](http://npm-stat.com/charts.html?package=crx2ff&author=&from=&to=)
 [![Build Status](https://travis-ci.org/abarreir/crx2ff.svg)](https://travis-ci.org/abarreir/crx2ff)
